@@ -1,3 +1,9 @@
 Ciencias # 110 # 30 #
 Letras # 250 # 20 #
 DibujoTecnico # 225 # 23
+Religion  # 191 # 20
+Ciudadana # 215 # 10
+Mates # 310 # 32
+EFisica # 215 # 35
+Conocimiento # 130 # 21
+Filosofia # 455 # 24
