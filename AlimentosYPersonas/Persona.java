@@ -32,6 +32,7 @@ public class Persona
         this.alturaEnCm=alturaEnCm;
         this.edad=edad;
         caloriasIngeridas=0;
+        comidasIngeridas = new ArrayList<Comida>();
     }
 
     public String getNombrePersona(){
@@ -90,8 +91,10 @@ public class Persona
         String nombreComida= comida.getNombreComida(); 
         int calorias = comida.getCalorias();
 
+        int metabolismoHombre = (10*getPeso() + 6*getAltura() + (5*getEdad()) + 5);
+        int metabolismoMujer = (10*getPeso() + 6*getAltura() + (5*getEdad() - 161));
         if(hombre=true){
-            if( caloriasIngeridas < (10*getPeso() + 6*getAltura() + (5*getEdad()) + 5)){
+            if( caloriasIngeridas < metabolismoHombre){
                 caloriasIngeridas = caloriasIngeridas + calorias;
             }
             else{
@@ -100,7 +103,7 @@ public class Persona
         }
 
         if(hombre=false){
-            if((caloriasIngeridas < (10*getPeso() + 6*getAltura() + (5*getEdad() - 161)))){
+            if((caloriasIngeridas < metabolismoMujer)){
                 caloriasIngeridas = caloriasIngeridas + calorias;
             }
             else{
@@ -108,13 +111,75 @@ public class Persona
             }
         }
 
-
         return calorias;
     }
 
     public int getCaloriasIngeridas(){
         return caloriasIngeridas;
 
+    }
+
+    public void getAlimentoMasCaloricoConsumido(){
+        int variable = 0;
+        for (int i = 0; i < comidasIngeridas.size(); i++) {
+            Comida comidaConMasCalorias = comidasIngeridas.get(i);
+            int posicion = i;
+            for (int j = i + 1; j < comidasIngeridas.size(); j++) {
+                Comida comidaActual = comidasIngeridas.get(j);
+                if (comidaConMasCalorias.getCalorias() < comidaActual.getCalorias()) {
+                    comidaConMasCalorias = comidaActual;
+                    posicion = j;
+                }
+            }
+            if (posicion != i) {                
+                Comida aux = comidasIngeridas.get(i);
+                comidasIngeridas.set(i, comidasIngeridas.get(posicion));
+                comidasIngeridas.set(posicion, aux);
+            } 
+
+            if (comidaConMasCalorias.getCalorias() != variable) {
+                if (comidaConMasCalorias.getCalorias() == 1) {
+                    System.out.println("");
+                    System.out.println(comidaConMasCalorias.getCalorias() + " calorias");
+                    System.out.println();
+                }
+                else {
+                    System.out.println("");
+                    System.out.println(comidaConMasCalorias.getCalorias() + " calorias");
+                    System.out.println("");
+                }
+                variable = comidaConMasCalorias.getCalorias();
+            }
+            System.out.println(comidaConMasCalorias.getCalorias());
+
+        } 
+
+    }
+
+    public String contestar(String pregunta){
+        String respuesta = "";
+        int metabolismoHombre = (10*getPeso() + 6*getAltura() + (5*getEdad()) + 5);
+        int metabolismoMujer = (10*getPeso() + 6*getAltura() + (5*getEdad() - 161));
+        if(metabolismoHombre > caloriasIngeridas || metabolismoMujer > caloriasIngeridas){
+            
+            if(pregunta.length() %3 == 0){
+                respuesta="SI";
+            
+            }
+            else{
+                respuesta="NO";
+            
+            }
+        }
+        
+        
+        if(pregunta.contains(nombrePersona) || metabolismoHombre < caloriasIngeridas || metabolismoMujer < caloriasIngeridas){
+            respuesta = pregunta.toUpperCase();
+
+        }
+        
+        
+        return respuesta;
     }
 
 }
