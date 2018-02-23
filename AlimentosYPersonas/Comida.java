@@ -7,8 +7,9 @@ import java.util.*;
  */
 public class Comida
 {
-    // instance variables - replace the example below with your own
+    // Campo del nombre de la comida
     public String nombreComida;
+    //Campo del numero de calorias
     public int calorias;
 
     /**
@@ -19,27 +20,39 @@ public class Comida
         this.nombreComida=nombreComida;
         this.calorias=calorias;
     }
-
+    /**
+     * Metodo que nos permite ver las calorias de la comida
+     */
     public int getCalorias(){
 
         return calorias;
 
     }
-
+    
+    /**
+     * Metodo que nos permite ver el nombre de la comida
+     */
     public String getNombreComida(){
         return nombreComida;
 
     }
     
+    /**
+     * Metodo que nos permite cambiar las calorias de la comida
+     */
     public void setCalorias(int calorias){
         this.calorias=calorias;
     
     }
-    
+    /**
+     * Metodo que nos permite cambiar el nombre
+     */
     public void setNombreComida(String nombreComida){
         this.nombreComida=nombreComida;
     }
-    
+    /**
+     * Metodo que nos permite ver los detalles de la comida
+     */
     public String detallesComida(){
         return getNombreComida() + "-" + getCalorias();
     
